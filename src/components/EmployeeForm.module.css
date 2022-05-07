@@ -1,4 +1,5 @@
 .container {
+  display: none;
   background-color: var(--color-guide-r);
   text-align: center;
 }

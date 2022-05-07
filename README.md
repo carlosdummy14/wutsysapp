@@ -7,4 +7,10 @@ This is a MVP to be show for future projects.
 ---
 
 - [ ] Employee form
+
   - [ ] Add employee
+  - [ ] Update employee
+
+- [ ] Employee list
+  - [ ] Get employees
+  - [ ] Delete employee
