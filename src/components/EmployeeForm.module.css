@@ -1,0 +1,25 @@
+.container {
+  background-color: var(--color-guide-r);
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  padding: var(--size-n);
+}
+
+.input {
+  margin-bottom: 0.8rem;
+  font-size: var(--size-n);
+  border-radius: var(--size-s);
+  padding: var(--size-s);
+}
+
+.button {
+  font-size: var(--size-x);
+  border-radius: var(--size-s);
+  width: fit-content;
+  align-self: flex-end;
+}
