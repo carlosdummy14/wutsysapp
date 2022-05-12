@@ -8,9 +8,28 @@ This is a MVP to be show for future projects.
 
 - [ ] Employee form
 
-  - [ ] Add employee
+  - [x] Add employee
   - [ ] Update employee
+  - [ ] Validate
 
 - [ ] Employee list
-  - [ ] Get employees
-  - [ ] Delete employee
+  - [x] Get employees
+  - [x] Delete employee
+  - [ ] Search by name
+
+---
+
+- [ ] Asset form
+
+  - [x] Add asset
+  - [ ] Update asset
+  - [ ] Validate
+
+- [ ] Asset list
+  - [ ] Get assets
+  - [ ] Delete asset
+  - [ ] Search by name
+
+---
+
+- [ ] Error handler
