@@ -23,13 +23,11 @@ const AssetList = () => {
       if (search === '') {
         setAssetsFilter([])
       } else {
-        setAssetsFilter(assets.filter((asset) => asset.genericName.includes(search)))
+        setAssetsFilter(assets.filter((asset) => asset.genericName.toLowerCase().includes(search)))
       }
     }, 500)
 
-    return () => {
-      clearTimeout(timerSearch)
-    }
+    return () => clearTimeout(timerSearch)
   }, [search])
 
   const handleDelete = async (assetId) => {
@@ -39,7 +37,7 @@ const AssetList = () => {
   }
 
   const handleChange = (ev) => {
-    setSearch(ev.target.value)
+    setSearch(ev.target.value.toLowerCase())
   }
 
   return (

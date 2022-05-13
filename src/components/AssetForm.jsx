@@ -26,7 +26,6 @@ const AssetForm = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    console.log({ asset })
 
     try {
       addAsset(asset)
