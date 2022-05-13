@@ -14,7 +14,8 @@ const AssetList = () => {
   }
 
   useEffect(() => {
-    getData()
+    const timerLoad = setTimeout(getData, 200)
+    return () => clearTimeout(timerLoad)
   }, [])
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const AssetList = () => {
     <div className={style.container}>
       <h3>Asset List</h3>
       <input
+        className={style.input}
         type='text'
         name='search'
         value={search}

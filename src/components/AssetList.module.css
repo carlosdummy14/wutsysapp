@@ -13,3 +13,11 @@
   height: 650px;
   gap: var(--size-s);
 }
+
+.input {
+  margin-bottom: 0.8rem;
+  font-size: var(--size-n);
+  border-radius: var(--size-s);
+  padding: var(--size-s);
+  font-family: inherit;
+}
