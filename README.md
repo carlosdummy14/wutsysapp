@@ -9,26 +9,26 @@ This is a MVP to be show for future projects.
 - [ ] Employee form
 
   - [x] Add employee
-  - [ ] Update employee
   - [ ] Validate
 
 - [ ] Employee list
   - [x] Get employees
   - [x] Delete employee
   - [ ] Search by name
+  - [ ] Update employee
 
 ---
 
 - [ ] Asset form
 
   - [x] Add asset
-  - [ ] Update asset
   - [ ] Validate
 
 - [ ] Asset list
-  - [ ] Get assets
-  - [ ] Delete asset
-  - [ ] Search by name
+  - [x] Get assets
+  - [x] Delete asset
+  - [x] Search by name
+  - [ ] Update asset
 
 ---
 
