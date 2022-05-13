@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
 import style from './Header.module.css'
 
 const Header = ({ working, setWorking }) => {
-  useEffect(() => {
-    setWorking('asset')
-  }, [])
+  const handleChange = (ev) => {
+    setWorking(ev.target.value)
+    window.localStorage.setItem('working', ev.target.value)
+  }
 
   return (
     <header>
@@ -16,7 +16,7 @@ const Header = ({ working, setWorking }) => {
             name='options'
             value='employee'
             checked={working === 'employee'}
-            onChange={(ev) => setWorking(ev.target.value)}
+            onChange={handleChange}
           />
           employee
         </label>
@@ -26,7 +26,7 @@ const Header = ({ working, setWorking }) => {
             name='options'
             value='asset'
             checked={working === 'asset'}
-            onChange={(ev) => setWorking(ev.target.value)}
+            onChange={handleChange}
           />
           asset
         </label>

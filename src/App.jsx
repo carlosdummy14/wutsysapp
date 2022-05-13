@@ -7,7 +7,10 @@ import { useState } from 'react'
 import Header from './components/Header'
 
 function App() {
-  const [working, setWorking] = useState('')
+  const [working, setWorking] = useState(() => {
+    const localWorking = window.localStorage.getItem('working') || null
+    return localWorking || 'employee'
+  })
 
   return (
     <div className={style.app}>
