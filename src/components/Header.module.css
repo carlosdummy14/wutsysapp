@@ -1,0 +1,4 @@
+.options {
+  display: flex;
+  margin-bottom: var(--size-n);
+}

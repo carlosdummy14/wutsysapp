@@ -3,24 +3,28 @@ import EmployeeForm from './components/EmployeeForm'
 import EmployeeList from './components/EmployeeList'
 import AssetForm from './components/AssetForm'
 import AssetList from './components/AssetList'
-
-const WORKING = 'asset'
+import { useState } from 'react'
+import Header from './components/Header'
 
 function App() {
+  const [working, setWorking] = useState('')
+
   return (
     <div className={style.app}>
-      <h1>WUTsys</h1>
-      {WORKING === 'employee' ? (
-        <>
-          <EmployeeForm />
-          <EmployeeList />
-        </>
-      ) : (
-        <>
-          {/* <AssetForm /> */}
-          <AssetList />
-        </>
-      )}
+      <Header working={working} setWorking={setWorking} />
+      <main className={style.container}>
+        {working === 'employee' ? (
+          <>
+            <EmployeeForm />
+            <EmployeeList />
+          </>
+        ) : (
+          <>
+            <AssetForm />
+            <AssetList />
+          </>
+        )}
+      </main>
     </div>
   )
 }

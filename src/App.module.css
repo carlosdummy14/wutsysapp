@@ -6,3 +6,9 @@
   color: #fefefe;
   align-items: center;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--size-xxl);
+}

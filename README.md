@@ -6,16 +6,24 @@ This is a MVP to be show for future projects.
 
 ---
 
+- [ ] Header
+  - [x] Show employees or assets
+  - [ ] Css
+
+---
+
 - [ ] Employee form
 
   - [x] Add employee
   - [ ] Validate
+  - [ ] Css
 
 - [ ] Employee list
   - [x] Get employees
   - [x] Delete employee
   - [ ] Search by name
   - [ ] Update employee
+  - [ ] Css
 
 ---
 
@@ -23,13 +31,16 @@ This is a MVP to be show for future projects.
 
   - [x] Add asset
   - [ ] Validate
+  - [ ] Css
 
 - [ ] Asset list
   - [x] Get assets
   - [x] Delete asset
   - [x] Search by name
   - [ ] Update asset
+  - [ ] Css
 
 ---
 
+- [ ] Contexts
 - [ ] Error handler

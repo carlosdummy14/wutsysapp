@@ -14,7 +14,7 @@ const AssetList = () => {
   }
 
   useEffect(() => {
-    const timerLoad = setTimeout(getData, 200)
+    const timerLoad = setTimeout(getData, 100)
     return () => clearTimeout(timerLoad)
   }, [])
 
