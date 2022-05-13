@@ -23,7 +23,6 @@ const EmployeeForm = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    console.log({ employee })
 
     try {
       addEmployee(employee)

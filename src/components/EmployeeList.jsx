@@ -1,9 +1,12 @@
 import style from './EmployeeList.module.css'
 import { useEffect, useState } from 'react'
 import { getAllEmployees, deleteEmployee } from '../api/employee.api'
+import Employee from './Employee'
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([])
+  const [search, setSearch] = useState('')
+  const [employeesFilter, setEmployeesFilter] = useState([])
 
   const getData = async () => {
     const { data } = await getAllEmployees()
@@ -11,42 +14,63 @@ const EmployeeList = () => {
   }
 
   useEffect(() => {
-    getData()
+    const timerLoad = setTimeout(getData, 100)
+    return () => clearTimeout(timerLoad)
   }, [])
+
+  useEffect(() => {
+    const timerSearch = setTimeout(() => {
+      if (search === '') {
+        setEmployeesFilter([])
+      } else {
+        setEmployeesFilter(
+          employees.filter((employee) => employee.name.toLowerCase().includes(search))
+        )
+      }
+    }, 500)
+
+    return () => clearTimeout(timerSearch)
+  }, [search])
 
   const handleDelete = async (employeeId) => {
     await deleteEmployee(employeeId)
     getData()
+    setSearch('')
+  }
+
+  const handleChange = (ev) => {
+    setSearch(ev.target.value.toLowerCase())
   }
 
   return (
     <div className={style.container}>
       <h3>Employee List</h3>
-      <input type='text' name='search' />
+      <input
+        className={style.input}
+        type='text'
+        name='search'
+        value={search}
+        placeholder='Search by name'
+        onChange={handleChange}
+      />
       <ul className={style.list}>
-        {employees?.map((employee) => {
-          return (
-            <li className={style.item} key={employee._id}>
-              <div className={style.image}>
-                <img src={employee.avatar} alt={employee.name} loading='lazy' />
-              </div>
-              <div className={style.profile}>
-                <span
-                  className={style.name}
-                  title={`id: ${employee.internalId}`}
-                >
-                  {employee.name}
-                </span>
-                <span className={style.other}>{employee.position}</span>
-                <span className={style.other}>{employee.area}</span>
-              </div>
-              <div>
-                <button>✏️</button>
-                <button onClick={() => handleDelete(employee._id)}>❌️</button>
-              </div>
-            </li>
-          )
-        })}
+        {employeesFilter.length === 0
+          ? employees.map((employee) => (
+              <Employee
+                key={employee._id}
+                {...employee}
+                employeeId={employee._id}
+                handleDelete={handleDelete}
+              />
+            ))
+          : employeesFilter.map((employee) => (
+              <Employee
+                key={employee._id}
+                {...employee}
+                employeeId={employee._id}
+                handleDelete={handleDelete}
+              />
+            ))}
       </ul>
     </div>
   )

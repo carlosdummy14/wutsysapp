@@ -13,26 +13,22 @@ This is a MVP to be show for future projects.
 ---
 
 - [ ] Employee form
-
   - [x] Add employee
   - [ ] Validate
   - [ ] Css
-
 - [ ] Employee list
   - [x] Get employees
   - [x] Delete employee
-  - [ ] Search by name
+  - [x] Search by name
   - [ ] Update employee
   - [ ] Css
 
 ---
 
 - [ ] Asset form
-
   - [x] Add asset
   - [ ] Validate
   - [ ] Css
-
 - [ ] Asset list
   - [x] Get assets
   - [x] Delete asset
@@ -43,4 +39,6 @@ This is a MVP to be show for future projects.
 ---
 
 - [ ] Contexts
+  - [ ] Employees
+  - [ ] Assets
 - [ ] Error handler
