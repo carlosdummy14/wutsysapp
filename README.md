@@ -40,5 +40,5 @@ This is a MVP to be show for future projects.
 
 - [ ] Contexts
   - [ ] Employees
-  - [ ] Assets
+  - [x] Assets
 - [ ] Error handler

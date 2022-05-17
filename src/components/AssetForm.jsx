@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { addAsset } from '../api/asset.api'
+import { AssetContext } from '../context/Asset/Asset.context'
+import { useContext, useState } from 'react'
 import style from './AssetForm.module.css'
 
 const ASSET_INITIAL_STATE = {
@@ -14,6 +14,8 @@ const ASSET_INITIAL_STATE = {
 
 const AssetForm = () => {
   const [asset, setAsset] = useState(ASSET_INITIAL_STATE)
+  const [error, setError] = useState('')
+  const { createAsset } = useContext(AssetContext)
 
   const handleChange = (ev) => {
     setAsset((prevAsset) => {
@@ -24,16 +26,15 @@ const AssetForm = () => {
     })
   }
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault()
-
     try {
-      addAsset(asset)
+      await createAsset(asset)
+      setAsset(ASSET_INITIAL_STATE)
     } catch (error) {
-      console.log(error)
+      setError(error.message)
+      setTimeout(() => setError(''), 2000)
     }
-
-    setAsset(ASSET_INITIAL_STATE)
   }
 
   return (
@@ -101,6 +102,7 @@ const AssetForm = () => {
           onChange={handleChange}
           value={asset.comments}
         />
+        {error === '' ? null : <span>{error}</span>}
         <button className={style.button} type='submit'>
           Add
         </button>

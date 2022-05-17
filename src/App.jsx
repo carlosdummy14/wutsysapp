@@ -5,6 +5,7 @@ import AssetForm from './components/AssetForm'
 import AssetList from './components/AssetList'
 import { useState } from 'react'
 import Header from './components/Header'
+import { AssetState } from './context/Asset/Asset.context'
 
 function App() {
   const [working, setWorking] = useState(() => {
@@ -22,10 +23,10 @@ function App() {
             <EmployeeList />
           </>
         ) : (
-          <>
+          <AssetState>
             <AssetForm />
             <AssetList />
-          </>
+          </AssetState>
         )}
       </main>
     </div>

@@ -1,21 +1,15 @@
-import style from './AssetList.module.css'
-import { useEffect, useState } from 'react'
-import { getAllAssets, deleteAsset } from '../api/asset.api'
+import { AssetContext } from '../context/Asset/Asset.context'
+import { useContext, useEffect, useState } from 'react'
 import Asset from './Asset'
+import style from './AssetList.module.css'
 
 const AssetList = () => {
-  const [assets, setAssets] = useState([])
+  const { assets, getAllAssets, deleteAsset } = useContext(AssetContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
 
-  const getData = async () => {
-    const { data } = await getAllAssets()
-    setAssets(data)
-  }
-
   useEffect(() => {
-    const timerLoad = setTimeout(getData, 100)
-    return () => clearTimeout(timerLoad)
+    getAllAssets()
   }, [])
 
   useEffect(() => {
@@ -30,9 +24,8 @@ const AssetList = () => {
     return () => clearTimeout(timerSearch)
   }, [search])
 
-  const handleDelete = async (assetId) => {
-    await deleteAsset(assetId)
-    getData()
+  const handleDelete = (assetId) => {
+    deleteAsset(assetId)
     setSearch('')
   }
 
