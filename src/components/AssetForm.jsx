@@ -1,6 +1,12 @@
 import { AssetContext } from '../context/Asset/Asset.context'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import style from './AssetForm.module.css'
+
+const ASSET_TYPE = {
+  HARDWARE: 'HARDWARE',
+  SOFTWARE: 'SOFTWARE',
+  OTHER: 'OTHER',
+}
 
 const ASSET_INITIAL_STATE = {
   internalId: '',
@@ -8,14 +14,28 @@ const ASSET_INITIAL_STATE = {
   brand: '',
   model: '',
   serialNumber: '',
-  type: 'HARDWARE',
+  type: ASSET_TYPE.HARDWARE,
   comments: '',
 }
 
 const AssetForm = () => {
   const [asset, setAsset] = useState(ASSET_INITIAL_STATE)
   const [error, setError] = useState('')
-  const { createAsset } = useContext(AssetContext)
+  const { assetSelected, createAsset, updateAsset } = useContext(AssetContext)
+
+  useEffect(() => {
+    if (assetSelected) {
+      setAsset({
+        internalId: assetSelected.internalId,
+        genericName: assetSelected.genericName,
+        brand: assetSelected.brand,
+        model: assetSelected.model,
+        serialNumber: assetSelected.serialNumber,
+        type: ASSET_TYPE[assetSelected.type],
+        comments: assetSelected.comments,
+      })
+    }
+  }, [assetSelected])
 
   const handleChange = (ev) => {
     setAsset((prevAsset) => {
@@ -29,7 +49,11 @@ const AssetForm = () => {
   const handleSubmit = async (ev) => {
     ev.preventDefault()
     try {
-      await createAsset(asset)
+      if (assetSelected) {
+        await updateAsset(asset, assetSelected._id)
+      } else {
+        await createAsset(asset)
+      }
       setAsset(ASSET_INITIAL_STATE)
     } catch (error) {
       setError(error.message)
@@ -87,9 +111,9 @@ const AssetForm = () => {
           value={asset.serialNumber}
         />
         <select value={asset.type} name='type' className={style.input} onChange={handleChange}>
-          <option>HARDWARE</option>
-          <option>SOFTWARE</option>
-          <option>OTHER</option>
+          <option>{ASSET_TYPE.HARDWARE}</option>
+          <option>{ASSET_TYPE.SOFTWARE}</option>
+          <option>{ASSET_TYPE.OTHER}</option>
         </select>
         <textarea
           autoComplete='off'
@@ -104,7 +128,7 @@ const AssetForm = () => {
         />
         {error === '' ? null : <span>{error}</span>}
         <button className={style.button} type='submit'>
-          Add
+          {assetSelected ? 'Update' : 'Add'}
         </button>
       </form>
     </div>

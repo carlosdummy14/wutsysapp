@@ -4,7 +4,7 @@ import Asset from './Asset'
 import style from './AssetList.module.css'
 
 const AssetList = () => {
-  const { assets, getAllAssets, deleteAsset } = useContext(AssetContext)
+  const { assets, getAllAssets, deleteAsset, getOneAsset } = useContext(AssetContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
 
@@ -29,6 +29,11 @@ const AssetList = () => {
     setSearch('')
   }
 
+  const handleUpdate = (assetId) => {
+    getOneAsset(assetId)
+    setSearch('')
+  }
+
   const handleChange = (ev) => {
     setSearch(ev.target.value.toLowerCase())
   }
@@ -47,10 +52,22 @@ const AssetList = () => {
       <ul className={style.list}>
         {assetsFilter.length === 0
           ? assets.map((asset) => (
-              <Asset key={asset._id} {...asset} assetId={asset._id} handleDelete={handleDelete} />
+              <Asset
+                key={asset._id}
+                {...asset}
+                assetId={asset._id}
+                handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
+              />
             ))
           : assetsFilter.map((asset) => (
-              <Asset key={asset._id} {...asset} assetId={asset._id} handleDelete={handleDelete} />
+              <Asset
+                key={asset._id}
+                {...asset}
+                assetId={asset._id}
+                handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
+              />
             ))}
       </ul>
     </div>

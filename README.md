@@ -33,7 +33,7 @@ This is a MVP to be show for future projects.
   - [x] Get assets
   - [x] Delete asset
   - [x] Search by name
-  - [ ] Update asset
+  - [x] Update asset
   - [ ] Css
 
 ---

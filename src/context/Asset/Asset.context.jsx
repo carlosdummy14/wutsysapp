@@ -1,12 +1,18 @@
 import { ASSET_ACTIONS } from '../actions'
 import { createContext, useReducer } from 'react'
-import { getAllAssetsAPI, deleteAssetAPI, createAssetAPI } from '../../api/asset.api'
+import {
+  getAllAssetsAPI,
+  deleteAssetAPI,
+  createAssetAPI,
+  updateAssetAPI,
+  getOneAssetAPI,
+} from '../../api/asset.api'
 import AssetReducer from './Asset.reducer'
 
 const AssetContext = createContext()
 
 const AssetState = ({ children }) => {
-  const INITIAL_STATE = { assets: [] }
+  const INITIAL_STATE = { assets: [], assetSelected: null }
   const [state, dispatch] = useReducer(AssetReducer, INITIAL_STATE)
 
   const getAllAssets = async () => {
@@ -37,11 +43,32 @@ const AssetState = ({ children }) => {
     })
   }
 
+  const updateAsset = async (asset, id) => {
+    try {
+      const { data } = await updateAssetAPI(asset, id)
+      dispatch({ type: ASSET_ACTIONS.UPDATE_ASSET, payload: { data, id } })
+    } catch (error) {
+      throw new Error(`Algo salio mal, revise sus datos...`)
+    }
+  }
+
+  const getOneAsset = async (id) => {
+    try {
+      const { data } = await getOneAssetAPI(id)
+      dispatch({ type: ASSET_ACTIONS.GET_ONE_ASSET, payload: data })
+    } catch (error) {
+      throw new Error(`Algo salio mal, revise sus datos...`)
+    }
+  }
+
   const value = {
     assets: state.assets,
+    assetSelected: state.assetSelected,
     getAllAssets,
     createAsset,
     deleteAsset,
+    updateAsset,
+    getOneAsset,
   }
 
   return <AssetContext.Provider value={value}>{children}</AssetContext.Provider>

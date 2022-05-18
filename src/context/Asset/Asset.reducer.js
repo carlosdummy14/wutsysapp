@@ -19,6 +19,20 @@ const AssetReducer = (state, dispatch) => {
         ...state,
         assets: state.assets.filter((asset) => asset._id !== payload),
       }
+    case ASSET_ACTIONS.GET_ONE_ASSET:
+      return {
+        ...state,
+        assetSelected: payload,
+      }
+    case ASSET_ACTIONS.UPDATE_ASSET: {
+      return {
+        ...state,
+        assets: state.assets.map((asset) => {
+          return asset._id === payload.id ? payload.data : asset
+        }),
+        assetSelected: null,
+      }
+    }
 
     default: {
       return state

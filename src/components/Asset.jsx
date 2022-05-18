@@ -16,6 +16,7 @@ const Asset = ({
   type,
   comments,
   handleDelete,
+  handleUpdate,
 }) => {
   return (
     <li className={style.item} key={assetId}>
@@ -34,7 +35,7 @@ const Asset = ({
         <span className={style.other}>{comments}</span>
       </div>
       <div>
-        <button>✏️</button>
+        <button onClick={() => handleUpdate(assetId)}>✏️</button>
         <button onClick={() => handleDelete(assetId)}>❌️</button>
       </div>
     </li>

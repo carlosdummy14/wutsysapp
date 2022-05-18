@@ -19,4 +19,16 @@ const deleteAssetAPI = async (id) => {
   return response
 }
 
-export { createAssetAPI, getAllAssetsAPI, deleteAssetAPI }
+const updateAssetAPI = async (asset, id) => {
+  const response = await axios.patch(`${BASE_URI}/${id}`, asset)
+  const data = await response.data
+  return data
+}
+
+const getOneAssetAPI = async (id) => {
+  const response = await axios.get(`${BASE_URI}/${id}`)
+  const data = await response.data
+  return data
+}
+
+export { createAssetAPI, getAllAssetsAPI, deleteAssetAPI, updateAssetAPI, getOneAssetAPI }
