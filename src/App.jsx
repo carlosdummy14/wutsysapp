@@ -6,6 +6,7 @@ import AssetList from './components/AssetList'
 import { useState } from 'react'
 import Header from './components/Header'
 import { AssetState } from './context/Asset/Asset.context'
+import { EmployeeState } from './context/Employee/Employee.context'
 
 function App() {
   const [working, setWorking] = useState(() => {
@@ -18,10 +19,10 @@ function App() {
       <Header working={working} setWorking={setWorking} />
       <main className={style.container}>
         {working === 'employee' ? (
-          <>
+          <EmployeeState>
             <EmployeeForm />
             <EmployeeList />
-          </>
+          </EmployeeState>
         ) : (
           <AssetState>
             <AssetForm />

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { addEmployee } from '../api/employee.api'
+import { EmployeeContext } from '../context/Employee/Employee.context'
+import { useContext, useEffect, useState } from 'react'
 import style from './EmployeeForm.module.css'
 
 const EMPLOYEE_INITIAL_STATE = {
@@ -11,26 +11,42 @@ const EMPLOYEE_INITIAL_STATE = {
 
 const EmployeeForm = () => {
   const [employee, setEmployee] = useState(EMPLOYEE_INITIAL_STATE)
+  const [error, setError] = useState('')
+  const { employeeSelected, createEmployee, updateEmployee } = useContext(EmployeeContext)
+
+  useEffect(() => {
+    if (employeeSelected) {
+      setEmployee({
+        internalId: employeeSelected.internalId,
+        name: employeeSelected.name,
+        position: employeeSelected.position,
+        area: employeeSelected.area,
+      })
+    }
+  }, [employeeSelected])
 
   const handleChange = (ev) => {
-    setEmployee((prevEmployeeForm) => {
+    setEmployee((prevEmployee) => {
       return {
-        ...prevEmployeeForm,
+        ...prevEmployee,
         [ev.target.name]: ev.target.value,
       }
     })
   }
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault()
-
     try {
-      addEmployee(employee)
+      if (employeeSelected) {
+        await updateEmployee(employee, employeeSelected._id)
+      } else {
+        await createEmployee(employee)
+      }
+      setEmployee(EMPLOYEE_INITIAL_STATE)
     } catch (error) {
-      console.log(error)
+      setError(error.message)
+      setTimeout(() => setError(''), 2000)
     }
-
-    setEmployee(EMPLOYEE_INITIAL_STATE)
   }
 
   return (
@@ -73,8 +89,9 @@ const EmployeeForm = () => {
           onChange={handleChange}
           value={employee.area}
         />
+        {error === '' ? null : <span>{error}</span>}
         <button className={style.button} type='submit'>
-          Add
+          {employeeSelected ? 'Update' : 'Add'}
         </button>
       </form>
     </div>

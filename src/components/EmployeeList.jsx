@@ -1,21 +1,15 @@
-import style from './EmployeeList.module.css'
-import { useEffect, useState } from 'react'
-import { getAllEmployees, deleteEmployee } from '../api/employee.api'
+import { EmployeeContext } from '../context/Employee/Employee.context'
+import { useContext, useEffect, useState } from 'react'
 import Employee from './Employee'
+import style from './EmployeeList.module.css'
 
 const EmployeeList = () => {
-  const [employees, setEmployees] = useState([])
+  const { employees, getAllEmployees, deleteEmployee, getOneEmployee } = useContext(EmployeeContext)
   const [search, setSearch] = useState('')
   const [employeesFilter, setEmployeesFilter] = useState([])
 
-  const getData = async () => {
-    const { data } = await getAllEmployees()
-    setEmployees(data)
-  }
-
   useEffect(() => {
-    const timerLoad = setTimeout(getData, 100)
-    return () => clearTimeout(timerLoad)
+    getAllEmployees()
   }, [])
 
   useEffect(() => {
@@ -32,9 +26,13 @@ const EmployeeList = () => {
     return () => clearTimeout(timerSearch)
   }, [search])
 
-  const handleDelete = async (employeeId) => {
-    await deleteEmployee(employeeId)
-    getData()
+  const handleDelete = (employeeId) => {
+    deleteEmployee(employeeId)
+    setSearch('')
+  }
+
+  const handleUpdate = (employeeId) => {
+    getOneEmployee(employeeId)
     setSearch('')
   }
 
@@ -55,12 +53,13 @@ const EmployeeList = () => {
       />
       <ul className={style.list}>
         {employeesFilter.length === 0
-          ? employees.map((employee) => (
+          ? employees?.map((employee) => (
               <Employee
                 key={employee._id}
                 {...employee}
                 employeeId={employee._id}
                 handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
               />
             ))
           : employeesFilter.map((employee) => (
@@ -69,6 +68,7 @@ const EmployeeList = () => {
                 {...employee}
                 employeeId={employee._id}
                 handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
               />
             ))}
       </ul>

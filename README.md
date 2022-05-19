@@ -20,7 +20,7 @@ This is a MVP to be show for future projects.
   - [x] Get employees
   - [x] Delete employee
   - [x] Search by name
-  - [ ] Update employee
+  - [x] Update employee
   - [ ] Css
 
 ---
@@ -39,6 +39,6 @@ This is a MVP to be show for future projects.
 ---
 
 - [ ] Contexts
-  - [ ] Employees
+  - [x] Employees
   - [x] Assets
 - [ ] Error handler

@@ -2,20 +2,39 @@ import axios from 'axios'
 
 const BASE_URI = 'http://127.0.0.1:4000/api/v1/employee'
 
-const addEmployee = async (employee) => {
+const createEmployeeAPI = async (employee) => {
   const response = await axios.post(BASE_URI, employee)
-  return response
+  const data = await response.data
+  return data
 }
 
-const getAllEmployees = async () => {
+const getAllEmployeesAPI = async () => {
   const response = await axios.get(BASE_URI)
   const data = await response.data
   return data
 }
 
-const deleteEmployee = async (employeeId) => {
-  const response = await axios.delete(`${BASE_URI}/${employeeId}`)
+const deleteEmployeeAPI = async (id) => {
+  const response = await axios.delete(`${BASE_URI}/${id}`)
   return response
 }
 
-export { addEmployee, getAllEmployees, deleteEmployee }
+const updateEmployeeAPI = async (employee, id) => {
+  const response = await axios.patch(`${BASE_URI}/${id}`, employee)
+  const data = await response.data
+  return data
+}
+
+const getOneEmployeeAPI = async (id) => {
+  const response = await axios.get(`${BASE_URI}/${id}`)
+  const data = await response.data
+  return data
+}
+
+export {
+  createEmployeeAPI,
+  getAllEmployeesAPI,
+  deleteEmployeeAPI,
+  updateEmployeeAPI,
+  getOneEmployeeAPI,
+}
