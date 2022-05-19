@@ -30,6 +30,16 @@ const Header = ({ working, setWorking }) => {
           />
           asset
         </label>
+        <label>
+          <input
+            type='radio'
+            name='options'
+            value='assign'
+            checked={working === 'assign'}
+            onChange={handleChange}
+          />
+          asset
+        </label>
       </div>
     </header>
   )

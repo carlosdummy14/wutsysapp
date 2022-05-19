@@ -14,7 +14,7 @@
   gap: var(--size-s);
 }
 
-@media screen and (min-height: 660px) {
+@media screen and (max-height: 900px) {
   .list {
     height: 400px;
   }

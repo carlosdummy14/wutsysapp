@@ -8,6 +8,7 @@ This is a MVP to be show for future projects.
 
 - [ ] Header
   - [x] Show employees or assets
+  - [x] Add assign
   - [ ] Css
 
 ---
@@ -35,6 +36,15 @@ This is a MVP to be show for future projects.
   - [x] Search by name
   - [x] Update asset
   - [ ] Css
+
+---
+
+- [ ] Assign Asset to Employee
+  - [ ] Employee selected
+  - [ ] Assets availables
+  - [ ] Assets selected
+  - [ ] Apply
+  - [ ] Cancel
 
 ---
 
