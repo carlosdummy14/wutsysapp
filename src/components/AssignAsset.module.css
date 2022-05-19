@@ -1,0 +1,39 @@
+.container {
+  background-color: var(--color-guide-b);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(25rem, 1fr));
+  grid-template-rows: repeat(2, minmax(25rem, 1fr));
+}
+
+.employee-selected {
+  background-color: rebeccapurple;
+  padding: var(--size-n);
+}
+
+.profile {
+  background-color: var(--color-bg-light);
+  color: var(--color-bg-dark);
+  padding: var(--size-xs);
+  display: flex;
+}
+
+.img {
+  width: var(--size-xxl);
+  height: var(--size-xxl);
+  background-color: var(--color-bg-dark);
+  border-radius: var(--size-xl);
+  overflow: hidden;
+}
+
+.img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--size-s);
+}

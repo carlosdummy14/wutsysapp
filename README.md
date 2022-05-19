@@ -40,7 +40,7 @@ This is a MVP to be show for future projects.
 ---
 
 - [ ] Assign Asset to Employee
-  - [ ] Employee selected
+  - [ ] Employee select
   - [ ] Assets availables
   - [ ] Assets selected
   - [ ] Apply

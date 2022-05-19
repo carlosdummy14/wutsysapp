@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Header from './components/Header'
 import { AssetState } from './context/Asset/Asset.context'
 import { EmployeeState } from './context/Employee/Employee.context'
+import AssignAsset from './components/AssignAsset'
 
 const SCREEN_TO_RENDER = {
   EMPLOYEE: 'employee',
@@ -17,7 +18,7 @@ const SCREEN_TO_RENDER = {
 function App() {
   const [working, setWorking] = useState(() => {
     const localWorking = window.localStorage.getItem('working') || null
-    return SCREEN_TO_RENDER[localWorking] || SCREEN_TO_RENDER.EMPLOYEE
+    return localWorking || SCREEN_TO_RENDER.EMPLOYEE
   })
 
   const screenToRender = () => {
@@ -39,9 +40,7 @@ function App() {
         )
 
       case SCREEN_TO_RENDER.ASSIGN:
-        return <h4>Assign</h4>
-      default:
-        break
+        return <AssignAsset />
     }
   }
 

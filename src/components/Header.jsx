@@ -38,7 +38,7 @@ const Header = ({ working, setWorking }) => {
             checked={working === 'assign'}
             onChange={handleChange}
           />
-          asset
+          assign
         </label>
       </div>
     </header>
