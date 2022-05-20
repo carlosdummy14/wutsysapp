@@ -25,29 +25,39 @@ function App() {
     switch (working) {
       case SCREEN_TO_RENDER.EMPLOYEE:
         return (
-          <EmployeeState>
-            <EmployeeForm />
-            <EmployeeList />
-          </EmployeeState>
+          <main className={style.doublecontainer}>
+            <EmployeeState>
+              <EmployeeForm />
+              <EmployeeList />
+            </EmployeeState>
+          </main>
         )
 
       case SCREEN_TO_RENDER.ASSET:
         return (
-          <AssetState>
-            <AssetForm />
-            <AssetList />
-          </AssetState>
+          <main className={style.doublecontainer}>
+            <AssetState>
+              <AssetForm />
+              <AssetList />
+            </AssetState>
+          </main>
         )
 
       case SCREEN_TO_RENDER.ASSIGN:
-        return <AssignAsset />
+        return (
+          <main className={style.singlecontainer}>
+            <EmployeeState>
+              <AssignAsset />
+            </EmployeeState>
+          </main>
+        )
     }
   }
 
   return (
     <div className={style.app}>
       <Header working={working} setWorking={setWorking} />
-      <main className={style.container}>{screenToRender()}</main>
+      {screenToRender()}
     </div>
   )
 }

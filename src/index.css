@@ -1,4 +1,11 @@
-* {
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -14,10 +21,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 :root {
   --color-guide-r: #a11a;
   --color-guide-g: #1a1a;
   --color-guide-b: #11aa;
+  --color-guide-p: rebeccapurple;
+  --color-guide-t: tomato;
+  --color-guide-u: peru;
+
   --color-bg-light: #eee;
   --color-bg-green: rgb(80, 112, 94);
   --color-bg-dark: #333;
