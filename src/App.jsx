@@ -1,13 +1,14 @@
-import style from './App.module.css'
-import EmployeeForm from './components/EmployeeForm'
-import EmployeeList from './components/EmployeeList'
+import { AssetState } from './context/Asset/Asset.context'
+import { ContextProvider } from './context/ContextProvider'
+import { EmployeeState } from './context/Employee/Employee.context'
+import { useState } from 'react'
 import AssetForm from './components/AssetForm'
 import AssetList from './components/AssetList'
-import { useState } from 'react'
-import Header from './components/Header'
-import { AssetState } from './context/Asset/Asset.context'
-import { EmployeeState } from './context/Employee/Employee.context'
 import AssignAsset from './components/AssignAsset'
+import EmployeeForm from './components/EmployeeForm'
+import EmployeeList from './components/EmployeeList'
+import Header from './components/Header'
+import style from './App.module.css'
 
 const SCREEN_TO_RENDER = {
   EMPLOYEE: 'employee',
@@ -46,9 +47,9 @@ function App() {
       case SCREEN_TO_RENDER.ASSIGN:
         return (
           <main className={style.singlecontainer}>
-            <EmployeeState>
+            <ContextProvider>
               <AssignAsset />
-            </EmployeeState>
+            </ContextProvider>
           </main>
         )
     }
