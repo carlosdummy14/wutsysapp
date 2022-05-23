@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import Employee from './Employee'
 import style from './EmployeeList.module.css'
 
-const EmployeeList = () => {
+const EmployeeList = ({ assignView }) => {
   const { employees, getAllEmployees, deleteEmployee, getOneEmployee } = useContext(EmployeeContext)
   const [search, setSearch] = useState('')
   const [employeesFilter, setEmployeesFilter] = useState([])
@@ -36,6 +36,12 @@ const EmployeeList = () => {
     setSearch('')
   }
 
+  const handleSelect = (employeeId) => {
+    console.log({ employeeId })
+    // selectEmployeeToAssign
+    setSearch('')
+  }
+
   const handleChange = (ev) => {
     setSearch(ev.target.value.toLowerCase())
   }
@@ -51,7 +57,7 @@ const EmployeeList = () => {
         placeholder='Search by name'
         onChange={handleChange}
       />
-      <ul className={style.list}>
+      <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
         {employeesFilter.length === 0
           ? employees?.map((employee) => (
               <Employee
@@ -60,6 +66,8 @@ const EmployeeList = () => {
                 employeeId={employee._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
+                handleSelect={handleSelect}
+                assignView={assignView}
               />
             ))
           : employeesFilter.map((employee) => (
@@ -69,6 +77,8 @@ const EmployeeList = () => {
                 employeeId={employee._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
+                handleSelect={handleSelect}
+                assignView={assignView}
               />
             ))}
       </ul>

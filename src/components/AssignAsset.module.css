@@ -7,7 +7,10 @@
 }
 
 .employee-selected {
+  background-color: var(--color-guide-t);
   padding: var(--size-n);
+  height: 100%;
+  width: 100%;
 }
 
 .title {
@@ -89,4 +92,22 @@
   width: fit-content;
   align-self: flex-end;
   cursor: pointer;
+}
+
+.employees-list {
+  background-color: var(--color-guide-g);
+  width: 100%;
+  height: 100%;
+}
+
+.assets-list {
+  background-color: var(--color-guide-t);
+  width: 100%;
+  height: 100%;
+}
+
+.assets-selected {
+  background-color: var(--color-guide-g);
+  width: 100%;
+  height: 100%;
 }

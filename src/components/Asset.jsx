@@ -17,6 +17,8 @@ const Asset = ({
   comments,
   handleDelete,
   handleUpdate,
+  handleSelect,
+  assignView,
 }) => {
   return (
     <li className={style.item} key={assetId}>
@@ -35,8 +37,14 @@ const Asset = ({
         <span className={style.other}>{comments}</span>
       </div>
       <div>
-        <button onClick={() => handleUpdate(assetId)}>✏️</button>
-        <button onClick={() => handleDelete(assetId)}>❌️</button>
+        {assignView ? (
+          <button onClick={() => handleSelect(assetId)}>️🎯Select</button>
+        ) : (
+          <>
+            <button onClick={() => handleUpdate(assetId)}>✏️Edit</button>
+            <button onClick={() => handleDelete(assetId)}>❌️Delete</button>
+          </>
+        )}
       </div>
     </li>
   )

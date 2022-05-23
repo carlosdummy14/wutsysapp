@@ -1,12 +1,12 @@
 import style from './AssignAsset.module.css'
 import EmployeeList from './EmployeeList'
+import AssetList from './AssetList'
 
 const AssignAsset = () => {
   return (
     <div className={style.container}>
-      <div style={{ backgroundColor: 'blue' }}>
-        <h4>Employees Availables</h4>
-        <EmployeeList />
+      <div className={style['employees-list']}>
+        <EmployeeList assignView />
       </div>
 
       <div className={style['employee-selected']}>
@@ -38,17 +38,11 @@ const AssignAsset = () => {
         </div>
       </div>
 
-      <div style={{ backgroundColor: 'tomato' }}>
-        <h4>Assets Availables</h4>
-        <ul>
-          <li>item 1</li>
-          <li>item 2</li>
-          <li>item 3</li>
-          <li>item 4</li>
-          <li>item 5</li>
-        </ul>
+      <div className={style['assets-list']}>
+        <AssetList assignView />
       </div>
-      <div style={{ backgroundColor: 'peru' }}>
+
+      <div className={style['assets-selected']}>
         <h4>Assets Selected</h4>
         <ul>
           <li>item 1</li>

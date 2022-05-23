@@ -9,6 +9,8 @@ const Employee = ({
   area,
   handleDelete,
   handleUpdate,
+  handleSelect,
+  assignView,
 }) => {
   return (
     <li className={style.item} key={employeeId}>
@@ -23,8 +25,14 @@ const Employee = ({
         <span className={style.other}>{area}</span>
       </div>
       <div>
-        <button onClick={() => handleUpdate(employeeId)}>✏️</button>
-        <button onClick={() => handleDelete(employeeId)}>❌️</button>
+        {assignView ? (
+          <button onClick={() => handleSelect(employeeId)}>🎯Select</button>
+        ) : (
+          <>
+            <button onClick={() => handleUpdate(employeeId)}>✏️Edit</button>
+            <button onClick={() => handleDelete(employeeId)}>❌️Delete</button>
+          </>
+        )}
       </div>
     </li>
   )

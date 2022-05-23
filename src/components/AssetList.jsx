@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import Asset from './Asset'
 import style from './AssetList.module.css'
 
-const AssetList = () => {
+const AssetList = ({ assignView }) => {
   const { assets, getAllAssets, deleteAsset, getOneAsset } = useContext(AssetContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
@@ -34,6 +34,12 @@ const AssetList = () => {
     setSearch('')
   }
 
+  const handleSelect = (assetId) => {
+    console.log({ assetId })
+    // selectAssetToAssign
+    setSearch('')
+  }
+
   const handleChange = (ev) => {
     setSearch(ev.target.value.toLowerCase())
   }
@@ -49,7 +55,7 @@ const AssetList = () => {
         placeholder='Search by name'
         onChange={handleChange}
       />
-      <ul className={style.list}>
+      <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
         {assetsFilter.length === 0
           ? assets.map((asset) => (
               <Asset
@@ -58,6 +64,8 @@ const AssetList = () => {
                 assetId={asset._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
+                handleSelect={handleSelect}
+                assignView={assignView}
               />
             ))
           : assetsFilter.map((asset) => (
@@ -67,6 +75,8 @@ const AssetList = () => {
                 assetId={asset._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
+                handleSelect={handleSelect}
+                assignView={assignView}
               />
             ))}
       </ul>
