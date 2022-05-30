@@ -1,43 +1,42 @@
-import { EmployeeContext } from '../context/Employee/Employee.context'
+import { AssetContext } from '../context/Asset/Asset.context'
 import { useContext, useEffect, useState } from 'react'
-import Employee from './Employee'
-import style from './EmployeeList.module.css'
+import AssetSelected from './AssetSelected'
+import style from './AssetSelectedList.module.css'
 
-const EmployeeList = ({ assignView, selectEmployee }) => {
-  const { employees, getAllEmployees, deleteEmployee, getOneEmployee } = useContext(EmployeeContext)
+const AssetSelectedList = ({ assignView }) => {
+  const { assets, getAllAssets, deleteAsset, getOneAsset } = useContext(AssetContext)
   const [search, setSearch] = useState('')
-  const [employeesFilter, setEmployeesFilter] = useState([])
+  const [assetsFilter, setAssetsFilter] = useState([])
 
   useEffect(() => {
-    getAllEmployees()
+    getAllAssets()
   }, [])
 
   useEffect(() => {
     const timerSearch = setTimeout(() => {
       if (search === '') {
-        setEmployeesFilter([])
+        setAssetsFilter([])
       } else {
-        setEmployeesFilter(
-          employees.filter((employee) => employee.name.toLowerCase().includes(search))
-        )
+        setAssetsFilter(assets.filter((asset) => asset.genericName.toLowerCase().includes(search)))
       }
     }, 500)
 
     return () => clearTimeout(timerSearch)
   }, [search])
 
-  const handleDelete = (employeeId) => {
-    deleteEmployee(employeeId)
+  const handleDelete = (assetId) => {
+    deleteAsset(assetId)
     setSearch('')
   }
 
-  const handleUpdate = (employeeId) => {
-    getOneEmployee(employeeId)
+  const handleUpdate = (assetId) => {
+    getOneAsset(assetId)
     setSearch('')
   }
 
-  const handleSelect = (employeeId) => {
-    selectEmployee(employeeId)
+  const handleSelect = (assetId) => {
+    console.log({ assetId })
+    // selectAssetToAssign
     setSearch('')
   }
 
@@ -47,7 +46,7 @@ const EmployeeList = ({ assignView, selectEmployee }) => {
 
   return (
     <div className={style.container}>
-      <h3>Employee List</h3>
+      <h3>Asset Selected</h3>
       <input
         className={style.input}
         type='text'
@@ -57,23 +56,23 @@ const EmployeeList = ({ assignView, selectEmployee }) => {
         onChange={handleChange}
       />
       <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
-        {employeesFilter.length === 0
-          ? employees?.map((employee) => (
-              <Employee
-                key={employee._id}
-                {...employee}
-                employeeId={employee._id}
+        {assetsFilter.length === 0
+          ? assets.map((asset) => (
+              <AssetSelected
+                key={asset._id}
+                {...asset}
+                assetId={asset._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
                 handleSelect={handleSelect}
                 assignView={assignView}
               />
             ))
-          : employeesFilter.map((employee) => (
-              <Employee
-                key={employee._id}
-                {...employee}
-                employeeId={employee._id}
+          : assetsFilter.map((asset) => (
+              <AssetSelected
+                key={asset._id}
+                {...asset}
+                assetId={asset._id}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
                 handleSelect={handleSelect}
@@ -85,4 +84,4 @@ const EmployeeList = ({ assignView, selectEmployee }) => {
   )
 }
 
-export default EmployeeList
+export default AssetSelectedList
