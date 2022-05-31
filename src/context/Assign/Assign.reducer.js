@@ -10,6 +10,12 @@ const AssignReducer = (state, dispatch) => {
         assignEmployeeSelected: payload,
       }
 
+    case ASSIGN_ACTIONS.CANCEL_EMPLOYEE_SELECTED:
+      return {
+        ...state,
+        assignEmployeeSelected: null,
+      }
+
     default: {
       return state
     }

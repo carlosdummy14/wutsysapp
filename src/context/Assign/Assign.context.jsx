@@ -17,11 +17,18 @@ const AssignState = ({ children }) => {
     })
   }
 
+  const cancelSelection = () => {
+    dispatch({
+      type: ASSIGN_ACTIONS.CANCEL_EMPLOYEE_SELECTED,
+    })
+  }
+
   const value = {
     assigns: state.assigns,
     assignSelected: state.assignSelected,
     assignEmployeeSelected: state.assignEmployeeSelected,
     getEmployeeSelected,
+    cancelSelection,
   }
 
   return <AssignContext.Provider value={value}>{children}</AssignContext.Provider>
