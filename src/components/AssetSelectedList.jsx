@@ -1,23 +1,23 @@
-import { AssetContext } from '../context/Asset/Asset.context'
 import { useContext, useEffect, useState } from 'react'
 import AssetSelected from './AssetSelected'
 import style from './AssetSelectedList.module.css'
+import { AssignContext } from '../context/Assign/Assign.context'
 
 const AssetSelectedList = ({ assignView }) => {
-  const { assets, getAllAssets, deleteAsset, getOneAsset } = useContext(AssetContext)
+  const { assignEmployeeSelected, deleteAsset } = useContext(AssignContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
-
-  useEffect(() => {
-    getAllAssets()
-  }, [])
 
   useEffect(() => {
     const timerSearch = setTimeout(() => {
       if (search === '') {
         setAssetsFilter([])
       } else {
-        setAssetsFilter(assets.filter((asset) => asset.genericName.toLowerCase().includes(search)))
+        setAssetsFilter(
+          assignEmployeeSelected.assets.filter((asset) =>
+            asset.asset.genericName.toLowerCase().includes(search)
+          )
+        )
       }
     }, 500)
 
@@ -26,17 +26,6 @@ const AssetSelectedList = ({ assignView }) => {
 
   const handleDelete = (assetId) => {
     deleteAsset(assetId)
-    setSearch('')
-  }
-
-  const handleUpdate = (assetId) => {
-    getOneAsset(assetId)
-    setSearch('')
-  }
-
-  const handleSelect = (assetId) => {
-    console.log({ assetId })
-    // selectAssetToAssign
     setSearch('')
   }
 
@@ -57,25 +46,21 @@ const AssetSelectedList = ({ assignView }) => {
       />
       <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
         {assetsFilter.length === 0
-          ? assets.map((asset) => (
+          ? assignEmployeeSelected?.assets.map((asset) => (
               <AssetSelected
-                key={asset._id}
-                {...asset}
-                assetId={asset._id}
+                key={asset.asset._id}
+                {...asset.asset}
+                assetId={asset.asset._id}
                 handleDelete={handleDelete}
-                handleUpdate={handleUpdate}
-                handleSelect={handleSelect}
                 assignView={assignView}
               />
             ))
           : assetsFilter.map((asset) => (
               <AssetSelected
-                key={asset._id}
-                {...asset}
-                assetId={asset._id}
+                key={asset.asset._id}
+                {...asset.asset}
+                assetId={asset.asset._id}
                 handleDelete={handleDelete}
-                handleUpdate={handleUpdate}
-                handleSelect={handleSelect}
                 assignView={assignView}
               />
             ))}

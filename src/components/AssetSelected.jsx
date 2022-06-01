@@ -16,8 +16,6 @@ const AssetSelected = ({
   type,
   comments,
   handleDelete,
-  handleUpdate,
-  handleSelect,
   assignView,
 }) => {
   return (
@@ -38,11 +36,10 @@ const AssetSelected = ({
       </div>
       <div>
         {assignView ? (
-          <button onClick={() => handleSelect(assetId)}>️🎯Select</button>
+          <button onClick={() => handleDelete(assetId)}>❌️Delete</button>
         ) : (
           <>
-            <button onClick={() => handleUpdate(assetId)}>✏️Edit</button>
-            <button onClick={() => handleDelete(assetId)}>❌️Delete</button>
+            <button onClick={() => {}}>✏️Edit</button>
           </>
         )}
       </div>

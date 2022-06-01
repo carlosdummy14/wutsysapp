@@ -8,6 +8,12 @@ const getEmployeeSelectedAPI = async (employee) => {
   return data
 }
 
+const getAssetSelectedAPI = async (asset) => {
+  const response = await axios.get(`${BASE_URI}/assetassign/${asset}`)
+  const data = await response.data
+  return data
+}
+
 const createAssignAPI = async (assign) => {
   const response = await axios.post(BASE_URI, assign)
   const data = await response.data
@@ -38,6 +44,7 @@ const getOneAssignAPI = async (id) => {
 }
 
 export {
+  getAssetSelectedAPI,
   getEmployeeSelectedAPI,
   createAssignAPI,
   getAllAssignAPI,

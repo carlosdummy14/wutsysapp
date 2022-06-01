@@ -1,6 +1,6 @@
 import { ASSIGN_ACTIONS } from '../actions'
 import { createContext, useReducer } from 'react'
-import { getEmployeeSelectedAPI } from '../../api/assign.api'
+import { getEmployeeSelectedAPI, getAssetSelectedAPI } from '../../api/assign.api'
 import AssignReducer from './Assign.reducer'
 
 const AssignContext = createContext()
@@ -23,12 +23,29 @@ const AssignState = ({ children }) => {
     })
   }
 
+  const deleteAsset = (assetId) => {
+    dispatch({
+      type: ASSIGN_ACTIONS.DELETE_ASSET,
+      payload: assetId,
+    })
+  }
+
+  const selectAssetToAssign = async (assetId) => {
+    const { data } = await getAssetSelectedAPI(assetId)
+    dispatch({
+      type: ASSIGN_ACTIONS.GET_ASSET_SELECTED,
+      payload: data,
+    })
+  }
+
   const value = {
     assigns: state.assigns,
     assignSelected: state.assignSelected,
     assignEmployeeSelected: state.assignEmployeeSelected,
     getEmployeeSelected,
     cancelSelection,
+    deleteAsset,
+    selectAssetToAssign,
   }
 
   return <AssignContext.Provider value={value}>{children}</AssignContext.Provider>

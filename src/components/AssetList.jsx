@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import Asset from './Asset'
 import style from './AssetList.module.css'
 
-const AssetList = ({ assignView }) => {
+const AssetList = ({ assignView, selectAsset }) => {
   const { assets, getAllAssets, deleteAsset, getOneAsset } = useContext(AssetContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
@@ -34,9 +34,8 @@ const AssetList = ({ assignView }) => {
     setSearch('')
   }
 
-  const handleSelect = (assetId) => {
-    console.log({ assetId })
-    // selectAssetToAssign
+  const handleSelect = (asset) => {
+    selectAsset(asset)
     setSearch('')
   }
 

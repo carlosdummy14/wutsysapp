@@ -1,23 +1,27 @@
 import style from './EmployeeSelected.module.css'
 
+const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
+
 const EmployeeSelected = ({ employeeSelected, handleCancel }) => {
   const { employee, assets } = employeeSelected
 
-  const AMOUNT_OF_HARDWARE = assets?.filter((asset) => asset.asset.type === 'HARDWARE').length || 0
-  const AMOUNT_OF_SOFTWARE = assets?.filter((asset) => asset.asset.type === 'SOFTWARE').length || 0
-  const AMOUNT_OF_OTHER = assets?.filter((asset) => asset.asset.type === 'OTHER').length || 0
+  const AMOUNT_OF_ASSETS =
+    assets?.length > 0
+      ? assets?.reduce(
+          (acum, item) => ({
+            ...acum,
+            [item.asset.type]: (acum[item.asset.type] += 1),
+          }),
+          { HARDWARE: 0, SOFTWARE: 0, OTHER: 0 }
+        )
+      : { HARDWARE: 0, SOFTWARE: 0, OTHER: 0 }
 
   return (
     <>
       <h4 className={style.title}>Employee Selected</h4>
       <div className={style.card}>
         <div className={style.image}>
-          <img
-            src={
-              employee?.avatar || 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
-            }
-            alt={employee?.name || 'Name'}
-          />
+          <img src={employee?.avatar || DEFAULT_AVATAR} alt={employee?.name || 'Name'} />
         </div>
         <div className={style.profile}>
           <span className={style.name}>{employee?.name || 'Name'}</span>
@@ -29,11 +33,11 @@ const EmployeeSelected = ({ employeeSelected, handleCancel }) => {
         <h4 className={style.title}>Resume</h4>
         <div className={style['resume-data']}>
           <span className={style.label}>Hardware</span>
-          <span className={style.amount}>{AMOUNT_OF_HARDWARE}</span>
+          <span className={style.amount}>{AMOUNT_OF_ASSETS.HARDWARE}</span>
           <span className={style.label}>Software</span>
-          <span className={style.amount}>{AMOUNT_OF_SOFTWARE}</span>
+          <span className={style.amount}>{AMOUNT_OF_ASSETS.SOFTWARE}</span>
           <span className={style.label}>Other</span>
-          <span className={style.amount}>{AMOUNT_OF_OTHER}</span>
+          <span className={style.amount}>{AMOUNT_OF_ASSETS.OTHER}</span>
         </div>
       </div>
       <div className={style.buttons}>
