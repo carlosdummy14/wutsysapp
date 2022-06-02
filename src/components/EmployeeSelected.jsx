@@ -3,11 +3,12 @@ import style from './EmployeeSelected.module.css'
 const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
 
 const EmployeeSelected = ({ employeeSelected, handleCancel }) => {
-  const { employee, assets } = employeeSelected
+  const { employee, assets } = employeeSelected ?? {}
+  const { avatar, position, name, area } = employee ?? ''
 
   const AMOUNT_OF_ASSETS =
     assets?.length > 0
-      ? assets?.reduce(
+      ? assets.reduce(
           (acum, item) => ({
             ...acum,
             [item.asset.type]: (acum[item.asset.type] += 1),
@@ -21,12 +22,12 @@ const EmployeeSelected = ({ employeeSelected, handleCancel }) => {
       <h4 className={style.title}>Employee Selected</h4>
       <div className={style.card}>
         <div className={style.image}>
-          <img src={employee?.avatar || DEFAULT_AVATAR} alt={employee?.name || 'Name'} />
+          <img src={avatar || DEFAULT_AVATAR} alt={name || 'Name'} />
         </div>
         <div className={style.profile}>
-          <span className={style.name}>{employee?.name || 'Name'}</span>
-          <span className={style.other}>{employee?.position || 'Position'}</span>
-          <span className={style.other}>{employee?.area || 'Area'}</span>
+          <span className={style.name}>{name || 'Name'}</span>
+          <span className={style.other}>{position || 'Position'}</span>
+          <span className={style.other}>{area || 'Area'}</span>
         </div>
       </div>
       <div className={style.resume}>

@@ -1,12 +1,13 @@
+import { AssignContext } from '../context/Assign/Assign.context'
 import { useContext, useEffect, useState } from 'react'
 import AssetSelected from './AssetSelected'
 import style from './AssetSelectedList.module.css'
-import { AssignContext } from '../context/Assign/Assign.context'
 
 const AssetSelectedList = ({ assignView }) => {
   const { assignEmployeeSelected, deleteAsset } = useContext(AssignContext)
   const [search, setSearch] = useState('')
   const [assetsFilter, setAssetsFilter] = useState([])
+  const { assets } = assignEmployeeSelected ?? []
 
   useEffect(() => {
     const timerSearch = setTimeout(() => {
@@ -14,9 +15,7 @@ const AssetSelectedList = ({ assignView }) => {
         setAssetsFilter([])
       } else {
         setAssetsFilter(
-          assignEmployeeSelected.assets.filter((asset) =>
-            asset.asset.genericName.toLowerCase().includes(search)
-          )
+          assets.filter((asset) => asset.asset.genericName.toLowerCase().includes(search))
         )
       }
     }, 500)
@@ -45,8 +44,8 @@ const AssetSelectedList = ({ assignView }) => {
         onChange={handleChange}
       />
       <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
-        {assetsFilter.length === 0
-          ? assignEmployeeSelected?.assets.map((asset) => (
+        {assetsFilter.length === 0 && assets
+          ? assets.map((asset) => (
               <AssetSelected
                 key={asset.asset._id}
                 {...asset.asset}
