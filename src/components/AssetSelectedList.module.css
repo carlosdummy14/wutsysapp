@@ -1,23 +1,19 @@
 .container {
   background-color: var(--color-guide-b);
   text-align: center;
+  height: var(--height-container);
+  padding: var(--size-s);
 }
 
 .list {
   display: flex;
   flex-direction: column;
   min-width: 500px;
-  padding: 0 var(--size-n);
+  padding: var(--size-xs);
   list-style: none;
   overflow-y: scroll;
-  height: 650px;
+  /* height: 650px; */
   gap: var(--size-s);
-}
-
-@media screen and (max-height: 900px) {
-  .list {
-    height: 400px;
-  }
 }
 
 .assignView {
@@ -31,4 +27,8 @@
   border-radius: var(--size-s);
   padding: var(--size-s);
   font-family: inherit;
+}
+
+.message {
+  margin-top: var(--size-xl);
 }

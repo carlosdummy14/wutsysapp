@@ -7,8 +7,7 @@ import { useContext } from 'react'
 import { AssignContext } from '../context/Assign/Assign.context'
 
 const AssignAsset = () => {
-  const { assignEmployeeSelected, getEmployeeSelected, cancelSelection, selectAssetToAssign } =
-    useContext(AssignContext)
+  const { getEmployeeSelected, cancelSelection, selectAssetToAssign } = useContext(AssignContext)
 
   const selectEmployee = (employeeId) => {
     getEmployeeSelected(employeeId)
@@ -29,17 +28,14 @@ const AssignAsset = () => {
       </div>
 
       <div className={style['employee-selected']}>
-        <EmployeeSelected
-          employeeSelected={assignEmployeeSelected || {}}
-          handleCancel={handleCancel}
-        />
+        <EmployeeSelected handleCancel={handleCancel} />
       </div>
 
       <div className={style['assets-list']}>
         <AssetList assignView selectAsset={selectAsset} />
       </div>
 
-      <div className={style['assets-selected']}>
+      <div className={style['assets-selected']} id='assetselectedlist'>
         <AssetSelectedList assignView />
       </div>
     </div>

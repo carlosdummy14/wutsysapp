@@ -32,38 +32,49 @@ const AssetSelectedList = ({ assignView }) => {
     setSearch(ev.target.value.toLowerCase())
   }
 
+  const getContainerSize = () => {
+    const container = document.getElementById('assetselectedlist') ?? 0
+    return container.clientHeight
+  }
+
   return (
-    <div className={style.container}>
+    <div className={style.container} style={{ '--height-container': `${getContainerSize()}px` }}>
       <h3>Asset Selected</h3>
-      <input
-        className={style.input}
-        type='text'
-        name='search'
-        value={search}
-        placeholder='Search by name'
-        onChange={handleChange}
-      />
-      <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
-        {assetsFilter.length === 0 && assets
-          ? assets.map((asset) => (
-              <AssetSelected
-                key={asset.asset._id}
-                {...asset.asset}
-                assetId={asset.asset._id}
-                handleDelete={handleDelete}
-                assignView={assignView}
-              />
-            ))
-          : assetsFilter.map((asset) => (
-              <AssetSelected
-                key={asset.asset._id}
-                {...asset.asset}
-                assetId={asset.asset._id}
-                handleDelete={handleDelete}
-                assignView={assignView}
-              />
-            ))}
-      </ul>
+      {assets && assets.length > 0 ? (
+        <>
+          <input
+            className={style.input}
+            type='text'
+            name='search'
+            value={search}
+            placeholder='Search by name'
+            onChange={handleChange}
+          />
+          <ul className={`${style.list} ${assignView ? style.assignView : ''}`}>
+            {assetsFilter.length === 0
+              ? assets.map((asset) => (
+                  <AssetSelected
+                    key={asset.asset._id}
+                    {...asset.asset}
+                    assetId={asset.asset._id}
+                    handleDelete={handleDelete}
+                    assignView={assignView}
+                  />
+                ))
+              : assetsFilter.map((asset) => (
+                  <AssetSelected
+                    key={asset.asset._id}
+                    {...asset.asset}
+                    assetId={asset.asset._id}
+                    handleDelete={handleDelete}
+                    assignView={assignView}
+                  />
+                ))}
+          </ul>
+        </>
+      ) : (
+        <p className={style.message}>{'<--- No Assets --->'}</p>
+      )}
     </div>
   )
 }

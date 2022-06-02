@@ -1,9 +1,12 @@
+import { useContext } from 'react'
+import { AssignContext } from '../context/Assign/Assign.context'
 import style from './EmployeeSelected.module.css'
 
 const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
 
-const EmployeeSelected = ({ employeeSelected, handleCancel }) => {
-  const { employee, assets } = employeeSelected ?? {}
+const EmployeeSelected = ({ handleCancel }) => {
+  const { assignEmployeeSelected } = useContext(AssignContext)
+  const { employee, assets } = assignEmployeeSelected ?? {}
   const { avatar, position, name, area } = employee ?? ''
 
   const AMOUNT_OF_ASSETS =
