@@ -12,7 +12,7 @@ const AssignReducer = (state, dispatch) => {
 
     case ASSIGN_ACTIONS.GET_ASSET_SELECTED: {
       const { assignEmployeeSelected } = state
-      const newAssets = [...assignEmployeeSelected.assets, { asset: { payload } }]
+      const newAssets = [...assignEmployeeSelected.assets, { asset: payload }]
       const newAssignEmployee = {
         ...assignEmployeeSelected,
         assets: newAssets,

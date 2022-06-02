@@ -1,7 +1,8 @@
 import { ASSIGN_ACTIONS } from '../actions'
 import { createContext, useReducer } from 'react'
-import { getEmployeeSelectedAPI, getAssetSelectedAPI } from '../../api/assign.api'
+import { getEmployeeSelectedAPI } from '../../api/assign.api'
 import AssignReducer from './Assign.reducer'
+import { getOneAssetAPI } from '../../api/asset.api'
 
 const AssignContext = createContext()
 
@@ -31,7 +32,9 @@ const AssignState = ({ children }) => {
   }
 
   const selectAssetToAssign = async (assetId) => {
-    const { data } = await getAssetSelectedAPI(assetId)
+    if (!state.assignEmployeeSelected) return
+
+    const { data } = await getOneAssetAPI(assetId)
     dispatch({
       type: ASSIGN_ACTIONS.GET_ASSET_SELECTED,
       payload: data,
