@@ -8,6 +8,7 @@ const ASSET_IMAGE = {
 
 const Asset = ({
   assetId,
+  assigned,
   genericName,
   internalId,
   brand,
@@ -38,7 +39,7 @@ const Asset = ({
       </div>
       <div>
         {assignView ? (
-          <button onClick={() => handleSelect(assetId)}>️🎯Select</button>
+          !assigned && <button onClick={() => handleSelect(assetId)}>️🎯Select</button>
         ) : (
           <>
             <button onClick={() => handleUpdate(assetId)}>✏️Edit</button>
