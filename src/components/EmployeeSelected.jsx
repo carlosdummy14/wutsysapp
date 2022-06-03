@@ -4,7 +4,7 @@ import style from './EmployeeSelected.module.css'
 
 const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
 
-const EmployeeSelected = ({ handleCancel }) => {
+const EmployeeSelected = ({ handleCancel, handleApply }) => {
   const { assignEmployeeSelected } = useContext(AssignContext)
   const { employee, assets } = assignEmployeeSelected ?? {}
   const { avatar, position, name, area } = employee ?? ''
@@ -45,7 +45,9 @@ const EmployeeSelected = ({ handleCancel }) => {
         </div>
       </div>
       <div className={style.buttons}>
-        <button className={style.button}>Apply</button>
+        <button className={style.button} onClick={handleApply}>
+          Apply
+        </button>
         <button className={style.button} onClick={handleCancel}>
           Cancel
         </button>

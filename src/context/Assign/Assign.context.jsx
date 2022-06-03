@@ -1,6 +1,6 @@
 import { ASSIGN_ACTIONS } from '../actions'
 import { createContext, useReducer } from 'react'
-import { getEmployeeSelectedAPI } from '../../api/assign.api'
+import { createAssignAPI, getEmployeeSelectedAPI } from '../../api/assign.api'
 import AssignReducer from './Assign.reducer'
 import { getOneAssetAPI } from '../../api/asset.api'
 
@@ -41,6 +41,20 @@ const AssignState = ({ children }) => {
     })
   }
 
+  const applyAssign = async () => {
+    const { employee, assets } = state.assignEmployeeSelected ?? {}
+    if (!employee || assets.length < 1) return
+    const data = {
+      employee: employee._id,
+      assets: assets.map((asset) => asset.asset._id),
+    }
+
+    const newAssign = await createAssignAPI(data)
+    dispatch({
+      type: ASSIGN_ACTIONS.APPLY_ASSIGN,
+    })
+  }
+
   const value = {
     assigns: state.assigns,
     assignSelected: state.assignSelected,
@@ -49,6 +63,7 @@ const AssignState = ({ children }) => {
     cancelSelection,
     deleteAsset,
     selectAssetToAssign,
+    applyAssign,
   }
 
   return <AssignContext.Provider value={value}>{children}</AssignContext.Provider>

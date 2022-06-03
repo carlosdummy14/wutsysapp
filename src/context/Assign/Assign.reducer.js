@@ -29,6 +29,12 @@ const AssignReducer = (state, dispatch) => {
         assignEmployeeSelected: null,
       }
 
+    case ASSIGN_ACTIONS.APPLY_ASSIGN:
+      return {
+        ...state,
+        assignEmployeeSelected: null,
+      }
+
     case ASSIGN_ACTIONS.DELETE_ASSET: {
       const { assignEmployeeSelected } = state
       const newAssets = assignEmployeeSelected.assets.filter((asset) => asset.asset._id !== payload)
